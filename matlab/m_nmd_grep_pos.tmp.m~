@@ -13,6 +13,7 @@ for iseed=1:nmd.NUM_SEEDS
     system(cmd);
     cmd = ['mv pos2.pos dump_' int2str(iseed) '_' int2str(ifft) '.pos'];
     system(cmd);
+
     end
 end
 
