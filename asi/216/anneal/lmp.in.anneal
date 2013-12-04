@@ -1,0 +1,89 @@
+#------------Prepare Geometry---------------------------------------------------------------
+units			metal
+atom_style		atomic
+read_data		lmp.in.x0
+#------------SW Potentials------------------------------------------------------------------
+pair_style      sw
+pair_coeff      * * Si.sw Si Si
+#------------Variables----------------------------------------------------------------------
+variable   	dt 		equal 0.0005
+variable	T_0		equal 0.001
+variable	T_100		equal 100
+variable	T_300		equal 300
+variable    	T_melt 		equal 3500
+variable	T_anneal	equal 1400
+variable	T_anneal2	equal 2000
+variable	time_avg	equal 1000000
+variable 	T_run 		equal ${T_300}
+
+log log_main.lammps
+
+
+#--------------------------------------------------------------------------
+#nvtanneal
+#--------------------------------------------------------------------------
+fix 		1 all nvt temp 1100 1100 10.0
+compute 	myDis all msd 
+thermo_style  	custom step temp press etotal pe ke vol c_myDis[4]
+thermo			500
+timestep		${dt}
+run			5000000
+#run			100
+unfix 			1
+uncompute 		myDis
+#--------------------------------------------------------------------------
+#nvequench
+#--------------------------------------------------------------------------
+fix 		1 all nve
+fix 		2 all temp/rescale 1 1100 300 0.01 1.0
+thermo_style  	custom step temp press etotal pe ke vol
+thermo			10
+#run			${quench_length}
+run			10
+unfix 			1 
+unfix 			2
+#--------------------------------------------------------------------------
+#nvtanneal
+#--------------------------------------------------------------------------
+fix 		1 all nvt temp 300 300 10.0
+compute 	myDis all msd 
+thermo_style  	custom step temp press etotal pe ke vol c_myDis[4]
+thermo			500
+timestep		${dt}
+run			2500000
+#run			100
+unfix 			1
+uncompute 		myDis
+
+#--------------------------------------------------------------------------
+#nve
+#--------------------------------------------------------------------------
+fix 		1 all nve
+fix 		2 all temp/rescale 1 ${T_run} ${T_run} 0.01 1.0
+fix		myave all ave/atom 1 1000 100000 x y z
+compute 	myDis all msd 
+dump		1 all custom 100000 lmp.x.nve.dump f_myave[1] f_myave[2] f_myave[3]
+dump_modify 	1 sort id
+thermo_style  	custom step temp press etotal pe ke vol c_myDis[4]
+thermo			1000
+timestep		${dt}
+run			1000000
+#run			100
+unfix 			1
+unfix 			2
+unfix 			myave
+undump 			1
+uncompute 		myDis
+#--------------------------------------------------------------------------
+#minenergy
+#--------------------------------------------------------------------------
+fix			1 all nve
+thermo_style  		custom step temp press etotal pe ke vol
+thermo			1
+minimize 		0 1e-6 1000 10000
+dump 			1 all custom 1 lmp.x.Emin.dump x y z
+dump_modify 		1 sort id
+run			1
+undump 			1
+unfix 			1
+
