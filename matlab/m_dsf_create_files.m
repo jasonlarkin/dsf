@@ -3,7 +3,7 @@
 %--------------------------------------------------------------------------
 clear
 %--------------------------------------------------------------------------
-    nmd.str.main = '~/dsf/asi/2160/' ;
+    nmd.str.main = '~/dsf/asi/4320/' ;
     nmd.str.matlab = '~/dsf/matlab/';
     nmd.str.gulp = 'gulp_disp_si_conv.tmp';
     nmd.str.lmp_in = 'lmp.in.x0.alloy.single.si.tmp';
@@ -18,9 +18,9 @@ nmd.si = m_si; nmd.constant = m_constant;
 nmd.m(1) = 1.0; nmd.m(2) = 3.0; nmd.NUM_ATOMS_TYPE = 1;
 %--------------------------------------------------------------------------
 nmd.walltime.lammps = 12; nmd.cpu.lammps = 8; 
-nmd.walltime.matlab = 12; nmd.cpu.matlab = 1; nmd.mem.matlab = 2;
+nmd.walltime.matlab = 12; nmd.cpu.matlab = 1; nmd.mem.matlab = 4;
 %--------------------------------------------------------------------------
-nmd.Nx = 3*10; nmd.Ny = 3; nmd.Nz = 3;
+nmd.Nx = 3*20; nmd.Ny = 3; nmd.Nz = 3;
 nmd.kptmaster(:,1) = [1:nmd.Nx]'; 
 nmd.kptmaster(:,2) = 0; nmd.kptmaster(:,3) = 0;
 nmd.NUM_KPTS = size(nmd.kptmaster(:,1:3),1);
