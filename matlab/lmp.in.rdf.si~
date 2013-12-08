@@ -1,0 +1,55 @@
+#--------------------------------------------------------------------------
+#input structure
+#--------------------------------------------------------------------------
+units		metal
+atom_style	atomic
+read_data	lmp.in.x0
+#--------------------------------------------------------------------------
+#si potentials
+#--------------------------------------------------------------------------
+pair_style      sw
+pair_coeff      * * Si.sw Si
+pair_style		lj/cut 10.0
+pair_coeff		1 1 0 0 10.0
+#--------------------------------------------------------------------------
+#variables
+#--------------------------------------------------------------------------
+variable   	dt 		equal 0.0005
+#--------------------------------------------------------------------------
+
+variable 	T_run 		equal 600
+variable 	seed 		equal 11111
+
+velocity 		all create ${T_run} ${seed} rot yes dist gaussian
+
+#--------------------------------------------------------------------------
+#nvtanneal
+#--------------------------------------------------------------------------
+fix 			1 all nvt temp 300 300 10.0
+compute 		myDis all msd 
+#compute 		myRDF all rdf 50 1 1 1 2 2 2
+#fix 			rdf all ave/time 10 1 100 c_myRDF file tmp.rdf mode vector 
+compute 		myRDF_all all rdf 75
+fix 			rdf_all all ave/time 10 1 100 c_myRDF_all file tmp_all.rdf mode vector 
+thermo_style  	custom step temp press etotal pe ke vol c_myDis[4]
+thermo			1
+timestep		${dt}
+run				100
+#run			100
+unfix 			1
+uncompute 		myDis
+
+#--------------------------------------------------------------------------
+#rdf
+#--------------------------------------------------------------------------
+#compute 	myRDF all rdf 100 1 1 1 2 2 2
+#fix 		rdf all ave/time 1 1 100 c_myRDF file tmp.rdf mode vector 
+#compute 	myRDF_all all rdf 100
+#fix 		rdf_all all ave/time 1 1 100 c_myRDF_all file tmp_all.rdf mode vector 
+#velocity 	all create 300.0 111111 rot yes dist gaussian
+#fix 		2 all nve
+#timestep	0.00905
+#thermo_style  	custom step temp press etotal vol
+#thermo		1
+#run             100	
+
