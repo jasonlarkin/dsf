@@ -3,7 +3,7 @@
 #--------------------------------------------------------------------------
 units		metal
 atom_style	atomic
-read_data	lmp.in.x0.1
+read_data	IN.X0
 #--------------------------------------------------------------------------
 #si potentials
 #--------------------------------------------------------------------------
@@ -18,14 +18,14 @@ variable   	dt 		equal 0.0005
 #--------------------------------------------------------------------------
 #SED parameters
 #--------------------------------------------------------------------------
-variable	w_step		equal 128		
-variable	w_total		equal 524288
-variable	t_total		equal 524288
+variable	w_step		equal T_STEP		
+variable	w_total		equal T_FFT
+variable	t_total		equal T_TOTAL
 variable	num_ffts	equal ${t_total}/${w_total}
 
 ##########SEED##########################################################
-variable iseed equal 2
-variable seed equal 2222
+variable iseed equal ISEED_TMP
+variable seed equal SEED_TMP
 
 #--------------------------------------------------------------------------
 variable 	T_run 		equal 300
@@ -78,4 +78,4 @@ log 	log_SED_${iseed}_${ifft}.lammps
 	uncompute		myDis
 
 next ifft
-jump lmp.in.sed.2 loop_fft
+jump LMP_TMP loop_fft
