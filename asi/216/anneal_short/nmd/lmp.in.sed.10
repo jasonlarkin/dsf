@@ -18,9 +18,9 @@ variable   	dt 		equal 0.0005
 #--------------------------------------------------------------------------
 #SED parameters
 #--------------------------------------------------------------------------
-variable	w_step		equal 128		
-variable	w_total		equal 524288
-variable	t_total		equal 524288
+variable	w_step		equal 256		
+variable	w_total		equal 1048576
+variable	t_total		equal 1048576
 variable	num_ffts	equal ${t_total}/${w_total}
 
 ##########SEED##########################################################
