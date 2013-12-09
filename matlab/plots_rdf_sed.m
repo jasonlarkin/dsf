@@ -2,8 +2,7 @@ clear all
 close all
 
 hfile1={'~/dsf/asi/216/'};
-expts={'anneal', 'anneal-short',...
-    'crystal'};
+expts={'crystal', 'anneal', 'anneal-short'};
 
 
 
@@ -36,7 +35,7 @@ end
 
 %-----------------------------------------------------------plots
 for colors=1:length(expts)
-rgb_value(colors,:) = [1+colors^3*30,150-colors^2*20,80+colors*40];
+rgb_value(colors,:) = [1+colors^2,80-colors*20,90+colors*20];
 
 rgb_value(colors,:) = abs(rgb_value(colors,:)./255);
 for i=1:length(rgb_value(colors,:))
@@ -44,7 +43,7 @@ for i=1:length(rgb_value(colors,:))
             rgb_value(colors,i)=1/rgb_value(colors,i);
         end
         if rgb_value(colors,i)>1
-            rgb_value(colors,i)=15/rgb_value(colors,i);
+            rgb_value(colors,i)=10/rgb_value(colors,i);
         end
 end
 end
@@ -61,7 +60,7 @@ Markers=['o','x','+','*','s','d','v','^','<','>','p','h','.',...
 fig=figure;
 for trial=1:length(expts)
 h(trial)=plot(coord(:,1,trial), c_myRDF_11(:,1,trial),...
-        [linestyles{trial} Markers(trial)], 'Color', colors(trial,:), 'MarkerSize', 5);
+        [linestyles{trial} ], 'Color', colors(trial,:), 'LineWidth', 2);
     M(trial, 1:length(expts(trial)))=expts(trial);
 hold on
 end
