@@ -1,7 +1,7 @@
 clear
 constant = m_constant;
 
-str_read = '/home/jason/dsf/asi/4320/';
+str_read = '~/dsf/asi/216/anneal/nmd/';
 % DSF(1).DSF = load([str_read 'DSF_long.mat']);
 % DSF(2).DSF = load([str_read 'DSF_tran.mat']);
 
