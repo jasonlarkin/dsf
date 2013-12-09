@@ -3,7 +3,7 @@
 %--------------------------------------------------------------------------
 clear
 %--------------------------------------------------------------------------
-    nmd.str.main = '~/dsf/asi/216/crystal/nmd/' ;
+    nmd.str.main = '~/dsf/asi/216/anneal_short/nmd/' ;
     nmd.str.matlab = '~/dsf/matlab/';
     nmd.str.gulp = 'gulp_disp_si_conv.tmp';
     nmd.str.lmp_in = 'lmp.in.x0.alloy.single.si.tmp';
