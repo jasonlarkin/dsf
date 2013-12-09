@@ -66,7 +66,7 @@ hold on
 end
 %plot(coord, c_myRDF_22(:,1), 'g')
 legend(h,M)
-xlabel('bins')
+xlabel('Ang.')
 ylabel('count')
 print('-r600','-cmyk','-dpdf',['./rdf.pdf'])
 
