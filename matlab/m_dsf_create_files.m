@@ -20,7 +20,7 @@ nmd.m(1) = 1.0; nmd.m(2) = 3.0; nmd.NUM_ATOMS_TYPE = 1;
 nmd.walltime.lammps = 12; nmd.cpu.lammps = 8; 
 nmd.walltime.matlab = 12; nmd.cpu.matlab = 1; nmd.mem.matlab = 4;
 %--------------------------------------------------------------------------
-nmd.Nx = 3*20; nmd.Ny = 3; nmd.Nz = 3;
+nmd.Nx = 3; nmd.Ny = 3; nmd.Nz = 3;
 nmd.kptmaster(:,1) = [1:nmd.Nx]'; 
 nmd.kptmaster(:,2) = 0; nmd.kptmaster(:,3) = 0;
 nmd.NUM_KPTS = size(nmd.kptmaster(:,1:3),1);
