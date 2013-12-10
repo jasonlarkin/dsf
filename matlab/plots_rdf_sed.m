@@ -74,13 +74,16 @@ print('-r600','-cmyk','-dpdf',['./rdf.pdf'])
 fig=figure;
 for trial=1:length(expts)
     subplot(1,length(expts), trial)
-    
+    hold on
+    ylim([10^11 1.5*10^12])
+    xlim([0 25])
 h(trial,1:3)=semilogy(SED(1,trial).omega, SED(1,trial).sed(:,1), ...
     SED(1,trial).omega, SED(1,trial).sed(:,2), ...
 SED(1,trial).omega, SED(1,trial).sed(:,3), 'MarkerSize', 0.005, 'LineWidth', 0.005);
     M(trial, 1:length(expts(trial)))=expts(trial);
 hold on
 end
+
 %plot(coord, c_myRDF_22(:,1), 'g')
 legend(h(:,1),M)
 xlabel('THz')
