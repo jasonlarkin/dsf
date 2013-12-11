@@ -2,7 +2,7 @@ clear all
 close all
 
 hfile1={'~/dsf/asi/216/'};
-expts={'crystal', 'anneal-long','anneal', 'anneal-short'};
+expts={'crystal', 'anneal-recrystal','anneal-long','anneal', 'anneal-short'};
 
 
 
@@ -76,7 +76,7 @@ for trial=1:length(expts)
     subplot(1,length(expts), trial)
     hold on
     ylim([10^11 1.5*10^12])
-    xlim([0 25])
+    xlim([0 27])
 h(trial,1:3)=semilogy(SED(1,trial).omega, SED(1,trial).sed(:,1), ...
     SED(1,trial).omega, SED(1,trial).sed(:,2), ...
 SED(1,trial).omega, SED(1,trial).sed(:,3), 'MarkerSize', 0.005, 'LineWidth', 0.005);
