@@ -50,9 +50,10 @@ end
 colors=jet(length(expts));
 linestyles = cellstr(char('-',':','-.','--','-',':','-.','--','-',':','-',':',...
 '-.','--','-',':','-.','--','-',':','-.'));
-Markers=['o','x','+','*','s','d','v','^','<','>','p','h','.',...
+Markers=['','o','x','+','*','s','d','v','^','<','>','p','h','.',...
 '+','*','o','x','^','<','h','.','>','p','s','d','v',...
 'o','x','+','*','s','d','v','^','<','>','p','h','.'];
+
 
 
 
@@ -60,12 +61,13 @@ Markers=['o','x','+','*','s','d','v','^','<','>','p','h','.',...
 fig=figure;
 for trial=1:length(expts)
 h(trial)=plot(coord(:,1,trial), c_myRDF_11(:,1,trial),...
-        [linestyles{trial} ], 'Color', colors(trial,:), 'LineWidth', 2);
+       [linestyles{1} Markers(1)], 'Color', colors(trial,:), 'LineWidth', 2,...
+       'MarkerFaceColor', 'none');
     M(trial, 1:length(expts(trial)))=expts(trial);
 hold on
 end
 %plot(coord, c_myRDF_22(:,1), 'g')
-legend(h,M)
+legend(h(:,1),M)
 xlabel('Ang.')
 ylabel('count')
 print('-r600','-cmyk','-dpdf',['./rdf.pdf'])
